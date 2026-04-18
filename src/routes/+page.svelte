@@ -1,6 +1,7 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
     import { vault } from "$lib/vault.svelte";
+    import logo from "$lib/assets/logo.png";
 
     let user = $state("");
     let password = $state("");
@@ -19,8 +20,8 @@
     <div class="card w-full max-w-sm bg-base-100 shadow-xl">
         <div class="card-body gap-5">
             <div class="flex flex-col items-center gap-2">
-                <div class="text-5xl">🔐</div>
-                <h1 class="card-title text-2xl">Password Vault</h1>
+                <div class="text-5xl"><img src={logo} alt=""></div>
+                <!-- <h1 class="card-title text-2xl">Password Vault</h1> -->
                 <p class="text-base-content/50 text-sm text-center">
                     Enter your master password to unlock your vault
                 </p>
@@ -36,13 +37,13 @@
                 <input
                     class="input"
                     type="text"
-                    placeholder="User"
+                    placeholder="Nazwa Użytkownika"
                     bind:value={user}
                 />
                 <input
                     class="input"
                     type={showPassword ? "text" : "password"}
-                    placeholder="Master password"
+                    placeholder="Hasło"
                     bind:value={password}
                     onkeydown={(e) => e.key === "Enter" && unlock()}
                     autocomplete="current-password"
