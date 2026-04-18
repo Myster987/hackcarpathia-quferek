@@ -1,23 +1,23 @@
 use iota_stronghold::Client;
-use std::collections::HashMap;
 use std::sync::Mutex;
-use tauri_plugin_stronghold::stronghold::Stronghold;
+use zeroize::Zeroizing;
 
 /// Sesja użytkownika.
-pub struct VaultSession {
-    pub stronghold: Stronghold,
+pub struct Session {
+    pub username: String,
+    pub vault_key: Zeroizing<Vec<u8>>,
     pub client: Client,
 }
 
 /// Globalny rejestr sesji użytkoników.
 pub struct AppState {
-    pub sessions: Mutex<HashMap<String, VaultSession>>,
+    pub session: Mutex<Option<Session>>,
 }
 
 impl AppState {
     pub fn new() -> Self {
         Self {
-            sessions: Mutex::new(HashMap::new()),
+            session: Mutex::new(None),
         }
     }
 }

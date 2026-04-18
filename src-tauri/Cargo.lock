@@ -1838,6 +1838,7 @@ dependencies = [
 name = "hackcarpathia-quferek"
 version = "0.1.0"
 dependencies = [
+ "anyhow",
  "argon2",
  "iota_stronghold",
  "rand 0.8.6",
