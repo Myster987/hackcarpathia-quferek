@@ -1,6 +1,4 @@
 <script lang="ts">
-    import { session } from "../../lib/vault.svelte";
-
     // let login_list = $state(session.listLogins());
 </script>
 

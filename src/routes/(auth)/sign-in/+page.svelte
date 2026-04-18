@@ -11,7 +11,7 @@
     async function signIn(e: Event) {
         e.preventDefault();
 
-        await user.login(username, password);
+        await user.signIn(username, password);
     }
 </script>
 

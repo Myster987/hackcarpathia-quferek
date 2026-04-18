@@ -1,6 +1,6 @@
 <script lang="ts">
     import "../app.css";
-    import { session } from "$lib/vault.svelte";
+    import { user } from "$lib/state.svelte";
     import { goto } from "$app/navigation";
     import { page } from "$app/state";
 
@@ -8,7 +8,7 @@
 
     $effect(() => {
         if (
-            !session.isAuthenticated &&
+            !user.isAuthenticated &&
             !PUBLIC_ROUTES.includes(page.url.pathname)
         ) {
             goto("/sign-in");

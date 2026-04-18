@@ -1,7 +1,7 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
     import logo from "$lib/assets/logo.png";
-    import { session } from "$lib/vault.svelte";
+    import { user } from "$lib/state.svelte";
     import { Eye, EyeOff } from "@lucide/svelte";
 
     let blad = $state("");
@@ -19,7 +19,7 @@
         }
         blad = "";
 
-        session.(username, password).catch((err) => (blad = err));
+        user.signUp(username, password).catch((err) => (blad = err));
     }
 </script>
 
