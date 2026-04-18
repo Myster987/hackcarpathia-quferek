@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { goto } from "$app/navigation";
     import logo from "$lib/assets/logo.png";
     import { session } from "$lib/vault.svelte";
     import { Eye, EyeOff } from "@lucide/svelte";
@@ -19,7 +20,7 @@
         <div
             class="card card-body card-border border-base-300 bg-base-200 p-6 flex gap-4"
         >
-            <div class="flex justify-center items-center gap-6">
+            <div class="flex flex-col justify-center items-center gap-6">
                 <img src={logo} alt="Logo" class="size-36" />
 
                 <h2 class="text-4xl text-center font-bold">Logowanie</h2>
@@ -52,7 +53,19 @@
                     {/if}
                 </button>
 
-                <button type="submit" class="btn btn-secondary">Zaloguj</button>
+                <div class="flex flex-col gap-2">
+                    <button type="submit" class="btn btn-secondary"
+                        >Zaloguj</button
+                    >
+
+                    <div>Lub</div>
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        onclick={() => goto("/sign-up")}>Załóż konto</button
+                    >
+                </div>
             </form>
         </div>
     </div>
