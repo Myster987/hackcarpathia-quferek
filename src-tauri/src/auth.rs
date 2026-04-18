@@ -9,9 +9,9 @@ use crate::crypto::{self, gen_salt, verify_password};
 pub enum AuthError {
     #[error("Hash error: {0}")]
     Hash(String),
-    #[error("User already exists")]
+    #[error("Użytkownik już istnieje")]
     UserExists,
-    #[error("User not found")]
+    #[error("Nie znaleziono użytkownika")]
     UserNotFound,
     #[error("IO error: {0}")]
     Io(#[from] std::io::Error),

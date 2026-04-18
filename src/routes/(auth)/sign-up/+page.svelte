@@ -10,16 +10,16 @@
     let passwordConfirm = $state("");
     let showPassword = $state(false);
 
-    async function signIn(e: Event) {
+    async function signUp(e: Event) {
         e.preventDefault();
 
         if (password !== passwordConfirm) {
-            blad = "Hasła muszą być identyczne"
+            blad = "Hasła muszą być identyczne";
             return 0;
         }
         blad = "";
 
-        await session.login(username, password);
+        session.register(username, password).catch((err) => (blad = err));
     }
 </script>
 
@@ -34,7 +34,7 @@
                 <h2 class="text-4xl text-center font-bold">Rejstracja</h2>
             </div>
 
-            <form onsubmit={signIn} class="flex flex-col gap-4 items-center">
+            <form onsubmit={signUp} class="flex flex-col gap-4 items-center">
                 <input
                     type="text"
                     bind:value={username}
@@ -43,7 +43,6 @@
                 />
 
                 {#if blad !== ""}
-
                     <p class="text-error">{blad}</p>
                 {/if}
 
@@ -59,12 +58,12 @@
                     placeholder="Powtórz hasło..."
                     class="input input-primary"
                 />
-                
+
                 <button
                     type="button"
                     onclick={() => {
-                        showPassword = !showPassword; 
-                        }}
+                        showPassword = !showPassword;
+                    }}
                     class="btn btn-ghost btn-xs"
                     aria-label="Toggle visibility"
                 >
@@ -75,9 +74,10 @@
                     {/if}
                 </button>
 
-                
                 <div class="flex flex-col gap-2">
-                    <button type="submit" class="btn btn-secondary">Zarejestruj</button>
+                    <button type="submit" class="btn btn-secondary"
+                        >Zarejestruj</button
+                    >
 
                     <div>Lub</div>
 

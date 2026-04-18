@@ -9,7 +9,7 @@ use crate::{
 pub enum VaultError {
     #[error("{0}")]
     Auth(String),
-    #[error("Not authenticated")]
+    #[error("Użytkownik nie jest zalogowany")]
     NotAuthenticated,
     #[error("Stronghold error: {0}")]
     Stronghold(String),
