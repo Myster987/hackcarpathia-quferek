@@ -59,7 +59,7 @@ function createSession() {
     async logout() {
       await logout();
       current = null;
-      goto("/auth");
+      goto("/sign-in");
     },
   };
 }
