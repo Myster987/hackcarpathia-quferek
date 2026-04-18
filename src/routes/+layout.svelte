@@ -18,6 +18,6 @@
     let { children } = $props();
 </script>
 
-<div class="flex min-h-screen">
+<div class="flex min-h-screen bg-200">
     {@render children()}
 </div>
