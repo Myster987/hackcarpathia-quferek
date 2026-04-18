@@ -19,7 +19,7 @@
         }
         blad = "";
 
-        session.register(username, password).catch((err) => (blad = err));
+        session.(username, password).catch((err) => (blad = err));
     }
 </script>
 

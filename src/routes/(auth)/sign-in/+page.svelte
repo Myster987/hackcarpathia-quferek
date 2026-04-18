@@ -1,7 +1,7 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
     import logo from "$lib/assets/logo.png";
-    import { session } from "$lib/vault.svelte";
+    import { user } from "$lib/state.svelte";
     import { Eye, EyeOff } from "@lucide/svelte";
 
     let username = $state("");
@@ -11,7 +11,7 @@
     async function signIn(e: Event) {
         e.preventDefault();
 
-        await session.login(username, password);
+        await user.login(username, password);
     }
 </script>
 
