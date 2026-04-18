@@ -1,5 +1,7 @@
 # Quferek
 
+> Kategoria: Cyberbezpieczeństwo
+
 W pełni lokalny manadżer haseł i notatek dla nastolatków wchodzących w wiek
 dorastania. 
 
