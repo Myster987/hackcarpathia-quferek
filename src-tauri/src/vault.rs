@@ -5,7 +5,7 @@ use crate::{
     state::{AppState, Session},
 };
 
-#[derive(Debug, thiserror::Error, serde::Serialize)]
+#[derive(Debug, thiserror::Error)]
 pub enum VaultError {
     #[error("{0}")]
     Auth(String),
@@ -21,14 +21,28 @@ impl From<auth::AuthError> for VaultError {
     }
 }
 
+impl serde::Serialize for VaultError {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::ser::Serializer,
+    {
+        serializer.serialize_str(self.to_string().as_ref())
+    }
+}
+
 #[tauri::command]
 pub async fn register(
     app: AppHandle,
     username: String,
     password: String,
 ) -> Result<(), VaultError> {
+    log::trace!("Register user data: username - {username}, password - {password}");
+
     let app_data_dir = app.path().app_data_dir().unwrap();
     auth::register_user(&app_data_dir, &username, &password)?;
+
+    log::trace!("User {username} was registerd");
+
     Ok(())
 }
 
@@ -39,6 +53,8 @@ pub async fn login(
     username: String,
     password: String,
 ) -> Result<(), VaultError> {
+    log::trace!("Login user data: username - {username}, password - {password}");
+
     let app_data_dir = app.path().app_data_dir().unwrap();
 
     let vault_key = auth::derive_vault_key(&app_data_dir, &username, &password)?;
@@ -49,6 +65,8 @@ pub async fn login(
     let Ok(client) = stronghold.load_client(vault_path.to_string_lossy().to_string()) else {
         return Err(VaultError::Auth(AuthError::UserNotFound.to_string()));
     };
+
+    log::trace!("User {username} signed in!");
 
     *state.session.lock().unwrap() = Some(Session {
         username,

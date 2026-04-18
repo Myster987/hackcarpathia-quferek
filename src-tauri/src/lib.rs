@@ -5,6 +5,8 @@ pub mod vault;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+    simple_logger::init().expect("Couldn't init logger");
+
     tauri::Builder::default()
         .plugin(
             tauri_plugin_stronghold::Builder::new(|password| {
