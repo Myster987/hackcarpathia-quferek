@@ -1,10 +1,11 @@
 <script lang="ts">
     import logo from "$lib/assets/logo.png";
     import { session } from "$lib/vault.svelte";
+    import { Eye, EyeOff } from "@lucide/svelte";
 
     let username = $state("");
     let password = $state("");
-    let show_password = $state(false);
+    let showPassword = $state(false);
 
     async function signIn(e: Event) {
         e.preventDefault();
@@ -14,7 +15,7 @@
 </script>
 
 <div class="flex flex-1 items-center justify-center">
-    <div class="w-2/5 md:w-1/5">
+    <div class="w-100">
         <div
             class="card card-body card-border border-base-300 bg-base-200 p-6 flex gap-4"
         >
@@ -32,11 +33,24 @@
                     class="input input-primary"
                 />
                 <input
-                    type={show_password ? "text" : "password"}
+                    type={showPassword ? "text" : "password"}
                     bind:value={password}
                     placeholder="Hasło..."
                     class="input input-primary"
                 />
+
+                <button
+                    type="button"
+                    onclick={() => (showPassword = !showPassword)}
+                    class="btn btn-ghost btn-xs"
+                    aria-label="Toggle visibility"
+                >
+                    {#if showPassword}
+                        <Eye />
+                    {:else}
+                        <EyeOff />
+                    {/if}
+                </button>
 
                 <button type="submit" class="btn btn-secondary">Zaloguj</button>
             </form>
