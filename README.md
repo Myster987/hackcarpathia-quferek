@@ -1,7 +1,10 @@
-# Tauri + SvelteKit + TypeScript
+# Quferek
 
-This template should help get you started developing with Tauri, SvelteKit and TypeScript in Vite.
+W pełni lokalny manadżer haseł i notatek dla nastolatków wchodzących w wiek
+dorastania. 
 
-## Recommended IDE Setup
-
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer).
+## Dlaczego?
+- młodzi ludzie często używają tych samych haseł w wielu serwisach
+- używane kombinacje są za proste, co naraża na niebezpieczeństwo (imie + rok urodzenia itd.)
+- synchronizuje hasła w pełni zaszyfrowanym połączeniami peer-to-peer
+- darmowy -> młodzież nie stać na płacenie miesięcznych subskrypcji
