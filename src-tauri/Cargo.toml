@@ -28,6 +28,7 @@ zeroize = { version = "1", features = ["derive"] }
 rand = "0.8"
 thiserror = "1"
 iota_stronghold = "2.1.0"
+anyhow = "1.0.102"
 
 [profile.dev.package.scrypt]
 opt-level = 3
