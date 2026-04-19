@@ -29,7 +29,7 @@ const sign_up = (username: string, password: string): Promise<void> =>
   invoke("sign_up", { username, password });
 
 const sign_in = (username: string, password: string): Promise<number[]> =>
-  invoke("login", { username, password });
+  invoke("sign_in", { username, password });
 
 const sign_out = (): Promise<void> => invoke("sign_out");
 
