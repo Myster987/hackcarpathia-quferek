@@ -4,6 +4,7 @@
     import { user } from "$lib/state.svelte";
     import { Eye, EyeOff } from "@lucide/svelte";
 
+    let blad = $state("");
     let username = $state("");
     let password = $state("");
     let showPassword = $state(false);
@@ -11,7 +12,11 @@
     async function signIn(e: Event) {
         e.preventDefault();
 
-        await user.signIn(username, password);
+        if (!username || !password) {
+            return;
+        }
+
+        user.signIn(username, password).catch((err) => (blad = err));
     }
 </script>
 
@@ -25,6 +30,10 @@
 
                 <h2 class="text-4xl text-center font-bold">Logowanie</h2>
             </div>
+
+            {#if blad}
+                <p class="text-error">{blad}</p>
+            {/if}
 
             <form onsubmit={signIn} class="flex flex-col gap-4 items-center">
                 <input
