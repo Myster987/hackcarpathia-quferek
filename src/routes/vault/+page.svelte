@@ -56,21 +56,10 @@
                             {#each login_list as login, i}
                                 <li
                                     class="flex items-center gap-3 px-5 py-3.5 hover:bg-base-200/60 transition-colors"
+                                    onclick={() => goto(`/vault/${login}`)}
                                 >
-                                    <div class="avatar placeholder">
-                                        <div
-                                            class="bg-primary/10 text-primary rounded-full size-8 text-xs font-semibold"
-                                        >
-                                            <span
-                                                >{String(login)
-                                                    .at(0)
-                                                    ?.toUpperCase() ??
-                                                    "#"}</span
-                                            >
-                                        </div>
-                                    </div>
                                     <span
-                                        class="text-sm text-base-content flex-1 truncate"
+                                        class="text-lg text-base-content flex-1 truncate hover:underline"
                                         >{login}</span
                                     >
                                     <span

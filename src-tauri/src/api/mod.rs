@@ -54,3 +54,17 @@ pub fn delete_login(state: State<'_, Mutex<AppState>>, name: &str) -> Result<(),
 
     db::delete_login(&user.db_conn, name)
 }
+
+#[tauri::command]
+pub fn update_login(
+    state: State<'_, Mutex<AppState>>,
+    name: &str,
+    password: &str,
+) -> Result<(), db::Error> {
+    let lock = state.lock().unwrap();
+    let Some(user) = lock.user.as_ref() else {
+        return Err(db::Error::LoginNotFound);
+    };
+
+    db::update_login(&user.db_conn, name, password)
+}

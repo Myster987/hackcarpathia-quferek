@@ -72,7 +72,7 @@
                     <button
                         type="button"
                         class="btn btn-secondary btn-xl"
-                        onclick={() => goto("/sign-up")}
+                        onclick={() => (window.location.href = "/sign-up")}
                         >Załóż konto
                     </button>
                 </div>

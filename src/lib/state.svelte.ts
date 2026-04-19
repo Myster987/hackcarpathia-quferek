@@ -25,6 +25,13 @@ export async function deleteLogin(name: string): Promise<void> {
   return invoke<void>("delete_login", { name });
 }
 
+export async function updateLogin(
+  name: string,
+  password: string,
+): Promise<void> {
+  return invoke<void>("update_login", { name, password });
+}
+
 const sign_up = (username: string, password: string): Promise<void> =>
   invoke("sign_up", { username, password });
 
@@ -53,14 +60,14 @@ function createUser() {
     },
 
     async signUp(username: string, password: string): Promise<void> {
-      await sign_up;
+      await sign_up(username, password);
 
       current = { username, loggedInAt: new Date() };
       goto("/vault");
     },
 
     async signIn(username: string, password: string): Promise<void> {
-      const keyBytes = await sign_in(username, password);
+      await sign_in(username, password);
 
       current = { username, loggedInAt: new Date() };
       goto("/vault");

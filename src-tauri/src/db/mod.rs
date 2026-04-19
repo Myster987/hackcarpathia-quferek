@@ -38,18 +38,20 @@ impl From<&Row<'_>> for Login {
     }
 }
 
+/// Create encrypted database.
 pub fn create_encrypted(path: impl AsRef<Path>, password: &str) -> Result<Connection, Error> {
     let conn = Connection::open(path)?;
     conn.execute_batch(&format!(
         "PRAGMA key = '{password}';
          CREATE TABLE IF NOT EXISTS logins (
              name          TEXT PRIMARY KEY,
-             password_hash TEXT NOT NULL
+             password TEXT NOT NULL
          );"
     ))?;
     Ok(conn)
 }
 
+/// Open existing database.
 pub fn open_encrypted(path: impl AsRef<Path>, password: &str) -> Result<Connection, Error> {
     let conn = Connection::open(path)?;
     conn.execute_batch(&format!("PRAGMA key = '{password}';"))?;
@@ -82,4 +84,13 @@ pub fn delete_login(conn: &Connection, login: &str) -> Result<(), Error> {
     conn.execute("DELETE FROM logins WHERE name = ?1", [login])
         .map(|_| ())
         .map_err(|_| Error::LoginNotFound)
+}
+
+pub fn update_login(conn: &Connection, login: &str, password: &str) -> Result<(), Error> {
+    conn.execute(
+        "UPDATE logins SET password_hash = ?1 WHERE name = ?2",
+        [password, login],
+    )
+    .map(|_| ())
+    .map_err(|_| Error::LoginNotFound)
 }

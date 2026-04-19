@@ -41,7 +41,8 @@ pub fn run() {
             api::get_all_logins,
             api::get_login,
             api::insert_new_login,
-            api::delete_login
+            api::delete_login,
+            api::update_login
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
