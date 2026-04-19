@@ -3,6 +3,7 @@ use std::sync::Mutex;
 use rusqlite::Connection;
 use tauri::Manager;
 
+pub mod api;
 pub mod auth;
 pub mod db;
 pub mod utils;
@@ -36,7 +37,11 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             auth::sign_in,
             auth::sign_up,
-            auth::sign_out
+            auth::sign_out,
+            api::get_all_logins,
+            api::get_login,
+            api::insert_new_login,
+            api::delete_login
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

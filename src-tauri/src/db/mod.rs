@@ -17,9 +17,16 @@ pub enum Error {
     Database(#[from] rusqlite::Error),
 }
 
+impl serde::Serialize for Error {
+    fn serialize<S: serde::Serializer>(&self, s: S) -> Result<S::Ok, S::Error> {
+        s.serialize_str(&self.to_string())
+    }
+}
+
+#[derive(Debug, serde::Serialize, serde::Deserialize)]
 pub struct Login {
-    name: String,
-    password: String,
+    pub name: String,
+    pub password: String,
 }
 
 impl From<&Row<'_>> for Login {
@@ -65,9 +72,9 @@ pub fn get_login(conn: &Connection, name: &str) -> Result<Login, Error> {
     .map_err(|_| Error::LoginNotFound)
 }
 
-pub fn get_all_logins(conn: &Connection) -> Result<Vec<Login>, Error> {
+pub fn get_all_logins(conn: &Connection) -> Result<Vec<String>, Error> {
     let mut stmt = conn.prepare("SELECT * FROM logins")?;
-    let rows = stmt.query_map([], |row| Ok(Login::from(row)))?;
+    let rows = stmt.query_map([], |row| row.get(0))?;
     rows.collect::<Result<Vec<_>, _>>().map_err(Error::Database)
 }
 

@@ -1,6 +1,30 @@
 import { goto } from "$app/navigation";
 import { invoke } from "@tauri-apps/api/core";
 
+interface Login {
+  name: string;
+  password: string;
+}
+
+export async function getAllLogins(): Promise<string[]> {
+  return invoke<string[]>("get_all_logins");
+}
+
+export async function getLogin(name: string): Promise<Login> {
+  return invoke<Login>("get_login", { name });
+}
+
+export async function insertLogin(
+  name: string,
+  password: string,
+): Promise<void> {
+  return invoke<void>("insert_new_login", { name, password });
+}
+
+export async function deleteLogin(name: string): Promise<void> {
+  return invoke<void>("delete_login", { name });
+}
+
 const sign_up = (username: string, password: string): Promise<void> =>
   invoke("sign_up", { username, password });
 
